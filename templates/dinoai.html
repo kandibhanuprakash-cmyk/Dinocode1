@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dino AI | Code With Dino</title>
+    <link rel="stylesheet" href="dinoai.css">
+    <link rel="stylesheet" href="dinostyle.css">
+    <script src="dinojs.js"></script>
+    <script src="dinoai.js"></script>
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+         ========================= -->
+
+       <nav id="mainNav">
+        <div class="nav-inner">
+            <a href="#top" class="brand">Code<span>Dino</span ></a>
+                <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+            </button>
+            <div id="nav1" class="nav1">
+               <a href="{{ url_for('home')}}">Home</a>
+                <a href="{{ url_for('course')}}">Courses</a>
+                <a href="{{ url_for('roadmap')}}">Roadmap</a>
+               
+                <a href="{{ url_for('aibot')}}">Ai Chat </a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- =========================
+         AI PAGE
+         ========================= -->
+
+    <main class="ai-page">
+
+
+        <section class="ai-container">
+
+            <!--    <h1>
+                        Dino AI
+                    </h1>
+
+                    <p>
+                        Your Coding Learning Assistant
+                    </p>
+-->
+               
+
+
+            <!-- CHAT AREA -->
+
+            <div
+                id="chatMessages"
+                class="chat-messages"
+            >
+
+                <!-- Initial AI message -->
+
+                <div class="message ai-message">
+
+                    <div class="avatar">
+                        🤖
+                    </div>
+
+                    <div class="bubble">
+
+                        <strong>
+                            Dino AI
+                        </strong>
+
+                        <p>
+                            Hi! 👋 I'm Dino AI.
+                        </p>
+
+                        <p>
+                            Ask me anything about
+                            programming, web development,
+                            databases or computer science.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SUGGESTIONS -->
+
+            <div class="suggestions">
+
+                <button onclick="askQuestion('Explain Python loops')">
+                    Explain Python loops
+                </button>
+
+                <button onclick="askQuestion('What is JavaScript?')">
+                    What is JavaScript?
+                </button>
+
+                <button onclick="askQuestion('Explain SQL joins')">
+                    SQL Joins
+                </button>
+
+                <button onclick="askQuestion('Give me a web development roadmap')">
+                    Web Development Roadmap
+                </button>
+
+            </div>
+
+
+
+            <!-- INPUT -->
+
+            <div class="input-container">
+
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="Ask Dino AI anything..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="sendButton"
+                    onclick="sendMessage()"
+                >
+                    ➤
+                </button>
+
+            </div>
+
+
+            <p class="ai-disclaimer">
+                Dino AI can make mistakes. Verify important information.
+            </p>
+
+
+        </section>
+
+    </main>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
