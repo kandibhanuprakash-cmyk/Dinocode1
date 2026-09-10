@@ -23,7 +23,7 @@ def aibot():
     return render_template("dinoai.html")
 
 
-@app.route("/api/chat", methods=["POST"])
+/*@app.route("/api/chat", methods=["POST"])
 def chat():
 
     data = request.get_json()
@@ -102,7 +102,7 @@ def chat():
             "error": "Dino AI could not generate a response."
 
         }), 500
-
+*/
 
 if __name__ == "__main__":
 
