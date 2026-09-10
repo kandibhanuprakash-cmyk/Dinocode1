@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
-client = genai.Client(os.environ.get()
+client = genai.Client(os.environ.get("api_key")
     api_key)
 @app.route("/")
 def home():
