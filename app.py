@@ -19,7 +19,90 @@ def about():
 def roadmap():
     return render_template("roadmap.html")
 
+@app.route("/aibot")
+def aibot():
+    return render_template("dinoai.html")
 
+
+@app.route("/api/chat", methods=["POST"])
+def chat():
+
+    data = request.get_json()
+
+    if not data:
+        return jsonify({
+            "error": "Invalid request"
+        }), 400
+
+    user_message = data.get("message", "").strip()
+
+    history = data.get("history", [])
+
+
+    if not user_message:
+        return jsonify({
+            "error": "Message is required"
+        }), 400
+
+
+    try:
+
+
+        formatted_history = []
+
+        for msg in history:
+
+            role = msg.get("role")
+
+            text = msg.get("text", "")
+
+            if role not in ["user", "model"]:
+                continue
+
+            formatted_history.append(
+                types.Content(
+                    role=role,
+                    parts=[
+                        types.Part.from_text(
+                            text=text
+                        )
+                    ]
+                )
+            )
+
+
+        chat_session = client.chats.create(
+
+            model="gemini-3.6-flash",
+
+            history=formatted_history
+
+        )
+
+
+      
+
+        response = chat_session.send_message(
+            user_message
+        )
+
+
+        return jsonify({
+
+            "response": response.text
+
+        })
+
+
+    except Exception as e:
+
+        print("Gemini Error:", e)
+
+        return jsonify({
+
+            "error": "Dino AI could not generate a response."
+
+        }), 500
 if __name__ == "__main__":
 
     app.run(
