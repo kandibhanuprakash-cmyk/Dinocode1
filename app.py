@@ -18,12 +18,12 @@ def about():
 @app.route("/roadmap")
 def roadmap():
     return render_template("roadmap.html")
-@app.route("/aibot")
+/*@app.route("/aibot")
 def aibot():
     return render_template("dinoai.html")
 
 
-/*@app.route("/api/chat", methods=["POST"])
+@app.route("/api/chat", methods=["POST"])
 def chat():
 
     data = request.get_json()
