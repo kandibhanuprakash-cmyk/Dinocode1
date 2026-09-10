@@ -5,8 +5,7 @@ from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
-client = genai.Client(os.environ.get("api_key")
-    api_key)
+client = genai.Client(api_key="AQ.Ab8RN6KvWfdv708tn4QS6PEBb0rilRX5eAeCnL2HF94ClAf-Iw")
 @app.route("/")
 def home():
     return render_template("codewithdino.html")
