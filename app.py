@@ -7,22 +7,28 @@ import os
 # Load environment variables
 load_dotenv()
 
-# Create Flask application
+# Create Flask app
 app = Flask(__name__)
 
-# Get Gemini API key from environment variable
-api_key = os.getenv("GEMINI_API_KEY")
 
-if not api_key:
-    raise RuntimeError("GEMINI_API_KEY is not set")
+# ==========================================
+# GEMINI CLIENT
+# ==========================================
 
-# Create Gemini client
-client = genai.Client(api_key=api_key)
+def get_gemini_client():
+    api_key = os.getenv("GEMINI_API_KEY")
+
+    if not api_key:
+        raise RuntimeError(
+            "GEMINI_API_KEY environment variable is missing."
+        )
+
+    return genai.Client(api_key=api_key)
 
 
-# =========================
+# ==========================================
 # WEBSITE ROUTES
-# =========================
+# ==========================================
 
 @app.route("/")
 def home():
@@ -49,38 +55,48 @@ def aibot():
     return render_template("dinoai.html")
 
 
-# =========================
-# GEMINI AI CHAT API
-# =========================
+# ==========================================
+# AI CHAT API
+# ==========================================
 
 @app.route("/api/chat", methods=["POST"])
 def chat():
 
     try:
-        # Get JSON request
+
+        # Get Gemini client only when chat is requested
+        client = get_gemini_client()
+
+        # Get JSON data
         data = request.get_json(silent=True)
 
         if not data:
             return jsonify({
-                "error": "Invalid request"
+                "error": "Invalid request."
             }), 400
 
-        # Get user's message
-        user_message = data.get("message", "").strip()
+        # Get message
+        user_message = data.get("message", "")
 
-        # Get conversation history
-        history = data.get("history", [])
+        if not isinstance(user_message, str):
+            return jsonify({
+                "error": "Message must be text."
+            }), 400
+
+        user_message = user_message.strip()
 
         if not user_message:
             return jsonify({
-                "error": "Message is required"
+                "error": "Message is required."
             }), 400
 
-        # Make sure history is a list
+        # Get history
+        history = data.get("history", [])
+
         if not isinstance(history, list):
             history = []
 
-        # Convert frontend history to Gemini format
+        # Convert history to Gemini format
         formatted_history = []
 
         for msg in history:
@@ -91,7 +107,6 @@ def chat():
             role = msg.get("role")
             text = msg.get("text", "")
 
-            # Gemini supports user/model roles
             if role not in ["user", "model"]:
                 continue
 
@@ -112,16 +127,18 @@ def chat():
                 )
             )
 
-        # Create Gemini chat session
+        # Create chat session
         chat_session = client.chats.create(
             model="gemini-2.5-flash",
             history=formatted_history
         )
 
-        # Send current user message
-        response = chat_session.send_message(user_message)
+        # Send message
+        response = chat_session.send_message(
+            user_message
+        )
 
-        # Get response text safely
+        # Get response
         response_text = getattr(response, "text", None)
 
         if not response_text:
@@ -129,24 +146,26 @@ def chat():
                 "error": "Gemini returned an empty response."
             }), 500
 
-        # Send response to frontend
         return jsonify({
             "response": response_text
         })
 
     except Exception as e:
 
-        # Print complete error in Vercel logs
-        print("Gemini Error:", repr(e))
+        # Print actual error to Vercel logs
+        print("====================================")
+        print("GEMINI ERROR:")
+        print(repr(e))
+        print("====================================")
 
         return jsonify({
-            "error": "Dino AI could not generate a response."
+            "error": str(e)
         }), 500
 
 
-# =========================
+# ==========================================
 # LOCAL DEVELOPMENT
-# =========================
+# ==========================================
 
 if __name__ == "__main__":
     app.run(
