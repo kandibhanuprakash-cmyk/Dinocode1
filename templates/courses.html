@@ -1,474 +1,244 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Code with Dino</title>
-  <link rel="stylesheet" href="dinostyle.css">
-  <script src="dinojs.js" defer></script>
+
+  <!-- Use root-level public assets -->
+  <link rel="stylesheet" href="/dinostyle.css">
+  <script src="/dinojs.js" defer></script>
 </head>
 <body>
-    <nav id="mainNav">
-        <div class="nav-inner">
-            <a href="#top" class="brand">Code<span>Dino</span></a>
-                <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
-            </button>
-            <div id="nav1" class="nav1">
-               <a href="{{ url_for('home')}}">Home</a>
-                <a href="{{ url_for('course')}}">Courses</a>
-                <a href="{{ url_for('roadmap')}}">Roadmap</a>
-               
-                <a href="#">Ai Chat </a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
-   <header id="top">
-        <div class="header-inner">
-            <p class="eyebrow">Stop searching. Start Learning.</p>
-            <h1 id="codewithdino">Code With <span>Dino</span></h1>
-            <p class="header-sub">One site to learn a language, follow a real roadmap, and track your progress toward a certificate instead of ten browser tabs.</p>
-            <div class="header-cta">
-                <a href="{{ url_for('course')}}" class="btn btn-primary">Start a course</a>
-                <a href="{{ url_for('roadmap')}}" class="btn btn-ghost">See the roadmap</a>
-            </div>
-        </div>
-        <div class="strata-decor" aria-hidden="true"></div>
-    </header>
-   <section id="courses">
-        <div class="section-head">
-            <p class="eyebrow">Module 1</p>
-            <h2>Courses</h2>
-        </div>
-        <div class="search-row">
-            <input type="search" id="courseSearch" placeholder="Search a language or track (e.g. python, react)">
-            <span id="searchCount" class="search-count"></span>
+  <nav id="mainNav">
+    <div class="nav-inner">
+      <a href="{{ url_for('home') }}" class="brand">Code<span>Dino</span></a>
+
+      <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" type="button">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div id="nav1" class="nav1">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('course') }}">Courses</a>
+        <a href="{{ url_for('roadmap') }}">Roadmap</a>
+        <a href="{{ url_for('aibot') }}">AI Chat</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top">
+    <div class="header-inner">
+      <p class="eyebrow">Stop searching. Start Learning.</p>
+      <h1 id="codewithdino">Code With <span>Dino</span></h1>
+      <p class="header-sub">One site to learn a language, follow a real roadmap, and track your progress toward a certificate instead of ten browser tabs.</p>
+
+      <div class="header-cta">
+        <a href="{{ url_for('course') }}" class="btn btn-primary">Start a course</a>
+        <a href="{{ url_for('roadmap') }}" class="btn btn-ghost">See the roadmap</a>
+      </div>
+    </div>
+    <div class="strata-decor" aria-hidden="true"></div>
+  </header>
+
+  <main>
+    <section id="courses">
+      <div class="section-head">
+        <p class="eyebrow">Module 1</p>
+        <h2>Courses</h2>
+      </div>
+
+      <div class="search-row">
+        <input type="search" id="courseSearch" placeholder="Search a language or track (e.g. python, react)">
+        <span id="searchCount" class="search-count"></span>
+      </div>
+
+      <h3 class="track-label">Core Languages</h3>
+
+      <div id="basic" class="basic card-grid">
+        <button class="course-card" id="python" data-course="python" style="color:white">Python</button>
+        <button class="course-card" id="kotlin" data-course="kotlin" style="color:white">Kotlin</button>
+        <button class="course-card" id="go" data-course="go" style="color:white">Go</button>
+        <button class="course-card" id="java" data-course="java" style="color:white">Java</button>
+        <button class="course-card" id="cpp" data-course="c++" style="color:white">C++</button>
+        <button class="course-card" id="c" data-course="c" style="color:white">C</button>
+      </div>
+
+      <!-- Course detail panels (hidden by default) -->
+      <div id="course-details">
+        <div class="strata" id="python-course" data-stage="Framework" style="display:none">
+          <h3 class="strata-title"><span class="strata-mark">Paid</span> Python</h3>
+          <div class="strata-items">
+            <a href="https://www.coursera.org/specializations/python" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4>Coursera</h4>
+                <p>Coursera providing a paid Python specialization (monthly pricing may vary).</p>
+              </div>
+            </a>
+
+            <a href="https://developer.ibm.com/languages/python/courses/" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:50px">Free</span> IBM</h4>
+                <p>IBM provides a free Python course for beginners.</p>
+              </div>
+            </a>
+
+            <a href="https://bugs.python.org" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:60px">Notes</span> Notes</h4>
+                <p>Free Python notes for beginners (PDF format).</p>
+              </div>
+            </a>
+          </div>
         </div>
 
-        <h3 class="track-label">Core Languages</h3>
-        <div id="basic" class="basic card-grid">
-            <button class="course-card" id="python"data-course="python" id="course-card"style="color:white">Python</button>
-         
-            <button class="course-card" data-course="kotlin" style="color:white" id="kotlin">Kotlin</button>
+        <div class="strata" id="kotlin-course" data-stage="Framework" style="display:none">
+          <h3 class="strata-title"><span class="strata-mark">Paid</span> Kotlin</h3>
+          <div class="strata-items">
+            <a href="https://blog.jetbrains.com/kotlin/2026/04/kotlin-professional-certificate-by-jetbrains-now-on-linkedin-learning/" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4>JetBrains</h4>
+                <p>JetBrains offering a professional Kotlin certificate (details on the provider site).</p>
+              </div>
+            </a>
 
-            <button class="course-card" data-course="go" id="go"style="color:white">Go</button>
+            <a href="https://www.classcentral.com/course/developer-android-basics-kotlin-99173" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:50px">Free</span> Class Central</h4>
+                <p>A free, self-paced Android basics curriculum using Kotlin.</p>
+              </div>
+            </a>
 
-            <button class="course-card" data-course="java" id="java"style="color:white">Java</button>
-   
-            <button class="course-card" id="cpp" data-course="c++"style="color:white">C++</button>
-     
-            <button class="course-card" id="c"data-course="c"style="color:white">C</button>
-   
-            </section>
-              <section id="webroadmap">
-                       <div class="strata" id="python-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Python</h3>
-            <div class="strata-items">
-                <div class="dig-item">
-                    <a href="https://www.coursera.org/specializations/python" target="_blank">
-                    <h4>Coursera</h4>
-                    <p>Coursera Providing an paid Python Course Monthly 625 Rupees</p>
-                </div>
-                </a>
-         
-                <div class="dig-item">
-                    <a href="https://developer.ibm.com/languages/python/courses/" target="_blank">
-                    <h4>     <span class="strata-mark" style="width:50px">Free</span>IBM</h4>
-                    <p>IBM Provides an Free Python course for begineers.</p>
-                    </a>
-                </div>
-            
-                <a href="https://bugs.python.org" target="_blank">
-                <div class="dig-item">
-                    <h4>   <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Python Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
+            <a href="#" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark">Notes</span> Notes</h4>
+                <p>Free Kotlin notes for beginners (PDF format).</p>
+              </div>
+            </a>
+          </div>
         </div>
+
+        <div class="strata" id="go-course" data-stage="Framework" style="display:none">
+          <h3 class="strata-title"><span class="strata-mark">Paid</span> Go</h3>
+          <div class="strata-items">
+            <a href="https://www.coursera.org/professional-certificates/google-cybersecurity" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4>Coursera</h4>
+                <p>Paid certification courses (provider details on their site).</p>
+              </div>
+            </a>
+
+            <a href="https://grow.google/certificates" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:50px">Free</span> Grow Google</h4>
+                <p>Provides official badges and free learning content.</p>
+              </div>
+            </a>
+
+            <a href="#" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:60px">Notes</span> Notes</h4>
+                <p>Free Go notes for beginners (PDF format).</p>
+              </div>
+            </a>
+          </div>
         </div>
-          
-                           <div class="strata" id="kotlin-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Kotlin</h3>
-            <div class="strata-items">
-                <a href="https://blog.jetbrains.com/kotlin/2026/04/kotlin-professional-certificate-by-jetbrains-now-on-linkedin-learning/" target="_blank">
-                <div class="dig-item">
-                    <h4>JetBrains</h4>
-                    <p>JetBrains Providing an paid Python Course Monthly $240 Annual in Linkdin</p>
-                </div>
-                </a>
-              <!--         -->
-                <a href="https://www.classcentral.com/course/developer-android-basics-kotlin-99173" target="_blank">
-                <div class="dig-item">
-             
-                    <h4>      <span class="strata-mark" style="width:50px">Free</span>Class Central</h4>
-                    <p>A free, self-paced online curriculum by Google via Class Central designed for beginners to learn app building and prepare for official certification paths.</p>
-                </div>
-                  <!-- -->
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                  
-                    <h4>   <span class="strata-mark" >Notes</span>Notes</h4>
-                    <p>Free Kotlin Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
+
+        <div class="strata" id="java-course" data-stage="Framework" style="display:none">
+          <h3 class="strata-title"><span class="strata-mark">Paid</span> Java</h3>
+          <div class="strata-items">
+            <a href="https://www.coursera.org/professional-certificates/java-developer" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4>Coursera</h4>
+                <p>Paid Java certification options (see provider page for pricing).</p>
+              </div>
+            </a>
+
+            <a href="https://learn.oracle.com/ols/learning-path/oracle-java-foundations" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:50px">Free</span> Oracle</h4>
+                <p>Oracle Java Foundations and related free learning paths.</p>
+              </div>
+            </a>
+
+            <a href="#" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:60px">Notes</span> Notes</h4>
+                <p>Free Java notes for beginners (PDF format).</p>
+              </div>
+            </a>
+          </div>
         </div>
-        <div class="strata" id="go-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Go</h3>
-            <div class="strata-items">
-                <a href="https://www.coursera.org/professional-certificates/google-cybersecurity" target="_blank">
-                <div class="dig-item">
-                    <h4>Coursera</h4>
-                    <p>The Google Data Analytics Professional Certificate on Coursera is one of the best value-paid certification options, costing around $49 per month and taking under six months to finish for high-paying entry-level tech roles</p>
-                </div>
-                </a>
-           
-                <a href="https://grow.google/certificates" target="_blank">
-                <div class="dig-item">
-                    <h4>     <span class="strata-mark" style="width:50px">Free</span>Grow Google</h4>
-                    <p>Provides free official badges and certificates in digital marketing, Google Analytics, and basic artificial intelligence.</p>
-                </div>
-              
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>  <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Go Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
+
+        <div class="strata" id="cpp-course" data-stage="Framework" style="display:none">
+          <h3 class="strata-title"><span class="strata-mark">Paid</span> C++</h3>
+          <div class="strata-items">
+            <a href="https://coddy.tech/certification/cpp" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4>Coddy Tech</h4>
+                <p>Hands-on C++ certification and browser-based coding challenges.</p>
+              </div>
+            </a>
+
+            <a href="#" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:60px">Notes</span> Notes</h4>
+                <p>Free C++ notes for beginners (PDF format).</p>
+              </div>
+            </a>
+          </div>
         </div>
-                   <div class="strata" id="java-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Java</h3>
-            <div class="strata-items">
-                <a href="https://www.coursera.org/professional-certificates/java-developer" target="_blank">
-                <div class="dig-item">
-                    <h4>IBM</h4>
-                    <p>IBM Providing an paid Python Course Monthly 7.5K</p>
-                </div>
-                </a>
-         
-                <a href="https://learn.oracle.com/ols/learning-path/oracle-java-foundations" target="_blank">
-                <div class="dig-item">
-                    <h4>       <span class="strata-mark" style="width:50px">Free</span>Oracle</h4>
-                    <p>Oracle Java Foundations: Offered directly via Oracle MyLearn, this official path teaches basic object-oriented constructs, loops, and arrays, providing an Explorer Badge upon completion</p>
-                </div>
-           
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>  <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Java Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
+
+        <div class="strata" id="c-course" data-stage="Framework" style="display:none">
+          <h3 class="strata-title"><span class="strata-mark">Paid</span> C</h3>
+          <div class="strata-items">
+            <a href="https://www.scholarhat.com/free-course/c-course-for-beginners" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4>Scholarhat</h4>
+                <p>Paid and free C language learning modules and tracks.</p>
+              </div>
+            </a>
+
+            <a href="https://www.sanfoundry.com/certification/c-programming-certification/" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:50px">Free</span> Sanfoundry</h4>
+                <p>Self-paced certification tests and practice material.</p>
+              </div>
+            </a>
+
+            <a href="#" target="_blank" rel="noopener">
+              <div class="dig-item">
+                <h4><span class="strata-mark" style="width:60px">Notes</span> Notes</h4>
+                <p>Free C notes for beginners (PDF format).</p>
+              </div>
+            </a>
+          </div>
         </div>
-                            <div class="strata" id="cpp-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> C++</h3>
-            <div class="strata-items">
-                <a href="https://coddy.tech/certification/cpp" target="_blank">
-                <div class="dig-item">
-                    <h4>Coursera</h4>
-                    <p>Offers a hands-on Coddy C++ Certification where you write real code in your browser and earn verifiable, shareable certificates for each finished section</p>
-                </div>
-                </a>
-        
-                <a href="https://coddy.tech/certification/cpp" target="_blank">
-                <div class="dig-item">
-                    <h4>       <span class="strata-mark" style="width:50px">Free</span>Coddy Tech</h4>
-                    <p>A free, self-paced online curriculum via Class Coddy Tech designed for beginners to learn app building and prepare for official certification paths.</p>
-                </div>
-         
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>  <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free cpp Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-                       <div class="strata" id="c-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> C</h3>
-            <div class="strata-items">
-                <a href="https://www.scholarhat.com/free-course/c-course-for-beginners" target="_blank">
-                <div class="dig-item">
-                    <h4>Scholarhat</h4>
-                    <p>Providing an c language in Scholarhat montly 10 to 20$ 5+ Modules</p>
-                </div>
-                </a>
-        
-                <a href="https://www.sanfoundry.com/certification/c-programming-certification/" target="_blank">
-                <div class="dig-item">
-                    <h4>       <span class="strata-mark" style="width:50px">Free</span>Sanfoundry</h4>
-                    <p>Offers a monthly online C Programming Certification test where you can complete self-paced assessments for certification.</p>
-                </div>
-     
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>  <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free c Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-        </div>
+
+      </div>
     </section>
-                  
 
-    <section id="Web">
-        <div class="section-head">
-            <p class="eyebrow">Module 2</p>
-            <h2>Web Development</h2>
-        </div>
+    <!-- Web module simplified (cards only) -->
+    <section id="web-modules">
+      <div class="section-head">
+        <p class="eyebrow">Module 2</p>
+        <h2>Web Development</h2>
+      </div>
 
-
-
-        <div id="webbasic" class="basic card-grid">
-            <button id="html"class="course-card" data-course="html">HTML</button>
-
-            <button id="css"class="course-card" data-course="css">CSS</button>
-
-            <button class="course-card" id="javascript" data-course="javascript"target="_blank">JavaScript</button>
-
-            <button  id="react"class="course-card" data-course="react js">React JS</button>
-      
-            <button class="course-card" id="angular"data-course="angular"target="_blank">Angular</button>
-    
-            <button class="course-card" id="node" data-course="node js"target="_blank">Node JS</button>
-     
-            <button id="django" class="course-card" data-course="django"target="_blank">Django</button>
-     
-            <button id="flask"class="course-card" data-course="flask">Flask</button>
-     
-            <button id="fastapi"class="course-card" data-course="fast api"style="color:white">FastAPI</button>
-      
-         
+      <div id="webbasic" class="basic card-grid">
+        <button id="html" class="course-card" data-course="html">HTML</button>
+        <button id="css" class="course-card" data-course="css">CSS</button>
+        <button id="javascript" class="course-card" data-course="javascript">JavaScript</button>
+        <button id="react" class="course-card" data-course="react js">React JS</button>
+        <button id="angular" class="course-card" data-course="angular">Angular</button>
+        <button id="node" class="course-card" data-course="node js">Node JS</button>
+        <button id="django" class="course-card" data-course="django">Django</button>
+        <button id="flask" class="course-card" data-course="flask">Flask</button>
+        <button id="fastapi" class="course-card" data-course="fast api" style="color:white">FastAPI</button>
+      </div>
     </section>
-          <section>
-                   <div class="strata" id="html-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Html</h3>
-            <div class="strata-items">
-                <a href="https://campus.w3schools.com/en-in/products/html-course" target="_blank">
-                <div class="dig-item">
-                    <h4>W3 School</h4>
-                    <p>Includes self-paced learning modules, practice tests, and a final proctored exam at 95$</p>
-                </div>
-                </a>
-       
-                <a href="https://scrimba.com/learn-html-and-css-c0p" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>Scrimba</h4>
-                    <p>Best for interactive learning. Their "Learn HTML and CSS" course includes a free completion certificate and lets you edit the instructor's code right inside your browser.</p>
-                </div>
-                </a>
-          
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Html Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-                   <div class="strata" id="css-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> CSS</h3>
-            <div class="strata-items">
-                <a href="https://www.udemy.com/topic/css" target="_blank">
-                <div class="dig-item">
-                    <h4>Udemy</h4>
-                    <p>Udemy's CSS courses provide affordable, lifetime access to comprehensive video bootcamps led by industry experts, ideal for building portfolio projects at your own pace</p>
-                </div>
-                </a>
-                <a href="https://www.mygreatlearning.com/academy/learn-for-free/courses/css-tutorial" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>Great Learning</h4>
-                    <p>Great Learning's CSS Tutorial delivers a concise, beginner-friendly video introduction to foundational styling concepts</p>
-                </div>
-                </a>
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Css Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-            <div class="strata" id="javascript-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Javascript</h3>
-            <div class="strata-items">
-                <a href="https://master.dev/learn/javascript/" target="_blank">
-                <div class="dig-item">
-                    <h4>Frontend Master</h4>
-                    <p>Frontend Master was Beginner Level Platform to Learn Javascript At 40$ Monthly</p>
-                </div>
-                </a>
-      
-                <a href="https://www.sololearn.com/en/learn/courses/javascript-introduction"target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>Solo Learn</h4>
-                    <p>Mobile-First Learning. Gamified, bite-sized lessons ideal for practicing code concepts on your phone</p>
-                </div>
-                </a>
-          
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Javascript Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-            
-                  <div class="strata" id="react-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> React js</h3>
-            <div class="strata-items">
-                <a href="https://www.coursera.org/professional-certificates/meta-front-end-developer" target="_blank">
-                <div class="dig-item">
-                    <h4>Meta</h4>
-                    <p>Meta Providing an best paid React Js certification on coursera at 8k</p>
-                </div>
-                </a>
-     
-                    <a href="https://www.scaler.com/topics/course/free-react-js-course/">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>Scaler</h4>
-                    <p>Scalaer is a Open Source free React Js Course for Beginner Level to Higher Level</p>
-                </div>
-                </a>
-        
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free React JsNotes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-                    <div class="strata" id="angular-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Angular</h3>
-            <div class="strata-items">
-                <a href="https://www.angulartraining.com/" target="_blank">
-                <div class="dig-item">
-                    <h4>Angular Training</h4>
-                    <p>Angular Training was hosted by Official Google with more modules and the cost for Junior Developer 70$</p>
-                </div>
-                </a>
-               <a href="https://www.mygreatlearning.com/angular/free-courses" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>My Great Learning</h4>
-                    <p>A free, self-paced online curriculum designed for beginners to learn app building and prepare for official certification paths.</p>
-                </div>
-                </a>
-        
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Angular Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
 
-                   <div class="strata" id="node-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Node Js</h3>
-            <div class="strata-items">
-                <a href="https://training.linuxfoundation.org/jsnad-cert-inactive/" target="_blank">
-                <div class="dig-item">
-                    <h4>JSNAD</h4>
-                    <p>Node.js certification is the OpenJS Node.js Application Developer (JSNAD) exam, administered by The Linux Foundation in partnership at 450$</p>
-                </div>
-                </a>
-    
-                <a href="https://www.freecodecamp.org/learn/back-end-development-and-apis" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>Free Code Camp</h4>
-                    <p>The absolute strongest, most industry-respected free Node.js credential you can earn is the freeCodeCamp Back End Development and APIs Certification</p>
-                </div>
-                </a>
-        
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Node JsNotes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-                   <div class="strata" id="django-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Django</h3>
-            <div class="strata-items">
-                <a href="https://learn.mongodb.com/pages/certification-program" target="_blank">
-                <div class="dig-item">
-                    <h4>MongoDB</h4>
-                    <p>The official MongoDB organization offers a premium, highly regarded certification.</p>
-                </div>
-                </a>
-        
-                <a href="https://www.geeksforgeeks.org/blogs/best-free-django-course-online/" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>Geeks For Geeks</h4>
-                    <p>Geeks For Geeks is offering a free top-quality MongoDB certification program. </p>
-                </div>
-                </a>
-          
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free MongoDB Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-                   <div class="strata" id="flask-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Flask </h3>
-            <div class="strata-items">
-                <a href="https://www.codecademy.com/learn/learn-flask" target="_blank">
-                <div class="dig-item">
-                    <h4>Coursera</h4>
-                    <p>Coursera offers high-quality certification programs.</p>
-                </div>
-                </a>
-        
-                <a href="https://cognitiveclass.ai/courses/developing-ai-applications-with-python-and-flask" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>Cognitive Class</h4>
-                    <p>A Free Flask Certification was Hosted by Ibm for Beginners </p>
-                </div>
-                </a>
-      
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Flask Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-                  <div class="strata" id="fastapi-course"data-stage="Framework" style="display:none">
-            <h3 class="strata-title"><span class="strata-mark">Paid</span> Fastapi</h3>
-            <div class="strata-items">
-                <a href="https://www.udemy.com/course/fastapi-the-complete-course" target="_blank">
-                <div class="dig-item">
-                    <h4>Udemy </h4>
-                    <p>Udemy is offering a FastAPI course at an affordable price for Beginners to Pro with More Modules .</p>
-                </div>
-                </a>
-     
-                <a href="https://catchwisdom.com/course/fastapi-backend-development" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:50px">Free</span>Catch Wisdom </h4>
-                    <p>A free, self-paced online curriculum by Catch wisdom for beginners to learn app building and prepare for official certification paths.</p>
-                </div>
-       
-                <a href="#" target="_blank">
-                <div class="dig-item">
-                    <h4>         <span class="strata-mark" style="width:60px">Notes</span>Notes</h4>
-                    <p>Free Fast api Notes For Begineers Pdf Format</p>
-                </div>
-                </a>
-            </div>
-        </div>
-          </section>
-
+  </main>
 </body>
 </html>
